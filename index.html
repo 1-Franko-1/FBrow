@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FBrow - 0.0.5</title>
+  <style>
+    :root {
+        --window-bar-bg: #222222;
+        --top-bar-bg: #2c2c2c;
+        --top-input-bg: #222222;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .window-topbar {
+      height: 30px;
+      background-color: var(--window-bar-bg);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      -webkit-app-region: drag; /* Makes the topbar draggable */
+    }
+
+    .restofwintopbar {
+      padding: 0 10px;
+      flex: 1;
+    }
+
+    .window-topbar .buttons {
+      display: flex;
+      height: 100%; /* Match the height of the window-topbar */
+    }
+
+    .window-topbar button {
+      height: 100%; /* Full height of the parent (window-topbar) */
+      aspect-ratio: 1; /* Make the button square */
+      border: none;
+      background-color: var(--window-bar-bg);
+      color: white;
+      cursor: pointer;
+      -webkit-app-region: no-drag; /* Allows interaction with buttons */
+    }
+
+    .window-topbar button:hover {
+      background-color: #555;
+    }
+
+    #close:hover {
+      background-color: #ff0000;
+    }
+
+    .top-bar {
+      display: flex;
+      background-color: var(--top-bar-bg);
+      padding: 5px;
+      align-items: center;
+      height: 30px;
+    }
+
+    .top-bar input {
+      flex: 1;
+      padding: 5px;
+      background-color: var(--top-input-bg);
+      border: none;
+      color: white;
+      border-radius: 10px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .top-bar input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #007bff;
+    }
+
+    .top-bar button {
+      margin: 2px;
+      min-width: 30px;
+      padding: 5px;
+      font-size: 15px;
+      background-color: var(--top-bar-bg);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .top-bar button:hover {
+      background-color: var(--top-input-bg);
+    }
+
+    /* Make sure the webview takes up the rest of the space */
+    webview {
+      width: 100%;
+      height: calc(100vh - 70px); /* Adjust height to exclude window-topbar and top URL bar */
+      border: none;
+    }
+
+    /* Existing styles here */
+    .search-history {
+      max-height: 150px;
+      overflow-y: auto;
+      border-top: 1px solid #333;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+    .history-item {
+      padding: 5px;
+      cursor: pointer;
+    }
+    .history-item:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+    <div class="window-topbar">
+      <div class="restofwintopbar">
+        <span>FBrow - OpenSource 0.0.5 Prototype</span>
+      </div>
+      <div class="buttons">
+        <button id="minimize">–</button>
+        <button id="maximize">⬜</button>
+        <button id="close">✖</button>
+      </div>
+    </div>
+  
+    <div class="top-bar">
+      <button id="back-button">🡨</button>
+      <button id="forward-button">🡪</button>
+      <button id="refresh-button">↻</button>
+      <input id="url-input" type="text" placeholder="Enter a URL or search query"/>
+      <button id="devtools-button">devtools</button>
+    </div>
+  
+    <webview id="browser-frame" src="https://www.google.com"></webview>
+  
+    <script src="renderer.js"></script>
+  </body>
+</html>
